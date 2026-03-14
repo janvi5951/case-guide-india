@@ -1,0 +1,5 @@
+DB_NAME = "case_guide_india"
+DB_USER = "postgres"
+DB_PASSWORD = "janvi"
+DB_HOST = "localhost"
+DB_PORT = "5432"

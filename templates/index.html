@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | Case Guide India</title>
+<!-- SHARED STYLES — included in all pages -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:  #1a1a2e;
+    --gold:  #e8b04b;
+    --light: #f8f9fc;
+    --text:  #2d2d2d;
+    --muted: #888;
+    --card-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
+
+  /* HEADER */
+  .site-header {
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+    padding: 18px 0;
+    text-align: center;
+  }
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.8rem;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+  .site-header p {
+    color: var(--gold);
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* NAVBAR */
+  .site-nav {
+    background: #12122a;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .site-nav .nav-link {
+    color: rgba(255,255,255,0.75) !important;
+    font-size: 0.87rem;
+    padding: 12px 14px !important;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .site-nav .nav-link:hover,
+  .site-nav .nav-link.active {
+    color: var(--gold) !important;
+  }
+  .dots-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 1.3rem;
+    line-height: 1;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .dots-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* DROPDOWN */
+  .profile-dropdown {
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important;
+    padding: 8px !important;
+    min-width: 210px !important;
+  }
+  .profile-dropdown .dropdown-item {
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 0.87rem;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+  .profile-dropdown .dropdown-item:hover { background: #f5f7ff; }
+  .user-info-box {
+    background: #f5f7ff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 4px;
+  }
+  .user-info-box .label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .user-info-box .username {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 0.9rem;
+    margin-top: 2px;
+  }
+
+  /* CARDS */
+  .content-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    padding: 32px;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 28px;
+  }
+
+  /* FORM */
+  .form-label { font-weight: 600; font-size: 0.87rem; color: var(--text); }
+  .form-control, .form-select {
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(26,26,46,0.07);
+  }
+  .btn-primary-custom {
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 28px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s;
+    cursor: pointer;
+  }
+  .btn-primary-custom:hover { background: #2d2d5e; transform: translateY(-1px); }
+  .btn-primary-custom:disabled { background: #888; transform: none; }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 18px;
+    font-size: 0.8rem;
+    margin-top: 60px;
+    border-top: 2px solid var(--gold);
+  }
+  .site-footer strong { color: var(--gold); }
+
+  /* DIVIDER */
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    border: none;
+    margin: 24px 0;
+  }
+</style>
+<style>
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 100%);
+  color: white;
+  padding: 70px 0;
+  text-align: center;
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: white;
+  margin-bottom: 12px;
+}
+.hero p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 560px; margin: 0 auto 30px; }
+.hero-btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.hero-btn:hover { opacity: 0.88; color: var(--navy); }
+
+.feature-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: var(--card-shadow);
+  height: 100%;
+  border-top: 3px solid var(--gold);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.10); }
+.feature-card h5 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 10px; }
+.feature-card p  { color: var(--muted); font-size: 0.87rem; margin: 0; line-height: 1.7; }
+
+.helpline-strip {
+  background: var(--navy);
+  color: white;
+  padding: 18px 0;
+  text-align: center;
+}
+.helpline-strip .item {
+  display: inline-block;
+  margin: 0 20px;
+  font-size: 0.85rem;
+}
+.helpline-strip .item strong { color: var(--gold); }
+
+.login-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  padding: 36px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 10px 24px;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+.tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- SHARED HEADER + NAVBAR — same in all 6 files -->
+<header class="site-header">
+  <h1>Case Guide India</h1>
+  <p>AI-Powered Legal Assistance System</p>
+</header>
+
+<nav class="navbar navbar-expand-lg site-nav">
+  <div class="container">
+    <button class="navbar-toggler border-0" type="button"
+            data-bs-toggle="collapse" data-bs-target="#mainNav"
+            style="color:white;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/" id="nl-home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/guidance_page" id="nl-guidance">Guidance</a></li>
+        <li class="nav-item"><a class="nav-link" href="/query_page" id="nl-query">Ask Query</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chat_page" id="nl-chat">Chat</a></li>
+        <li class="nav-item"><a class="nav-link" href="/dashboard" id="nl-dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/feedback_page" id="nl-feedback">Feedback</a></li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <button class="dots-btn dropdown-toggle" data-bs-toggle="dropdown"
+              data-bs-offset="0,8">&bull;&bull;&bull;</button>
+      <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+        <li>
+          <div class="user-info-box">
+            <div class="label">Logged in as</div>
+            <div class="username" id="dotUsername">Guest</div>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0f0f0;"></li>
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+        <li><a class="dropdown-item" href="/chat_page">AI Chatbot</a></li>
+        <li><a class="dropdown-item" href="/feedback_page">Feedback</a></li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0f0f0;"></li>
+        <li><a class="dropdown-item" href="#" onclick="showAbout()">About Project</a></li>
+        <li id="dotLogoutLi" style="display:none;">
+          <a class="dropdown-item" href="#" onclick="logoutUser()"
+             style="color:#dc3545;">Logout</a>
+        </li>
+        <li id="dotLoginLi">
+          <a class="dropdown-item" href="/"
+             style="color:#0d6efd;">Login / Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="container">
+    <div class="section-label" style="color:var(--gold);">Welcome to</div>
+    <h2>Case Guide India</h2>
+    <p>AI-powered legal assistance to help Indian citizens understand their rights, file complaints, and connect with the right authorities.</p>
+    <a href="/guidance_page" class="hero-btn">Explore Legal Guidance</a>
+    &nbsp;&nbsp;
+    <a href="/chat_page" class="hero-btn" style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.4);">Talk to AI Assistant</a>
+  </div>
+</div>
+
+<!-- Emergency helplines strip -->
+<div class="helpline-strip">
+  <div class="item">Police &nbsp;<strong>100</strong></div>
+  <div class="item">Women Helpline &nbsp;<strong>1091</strong></div>
+  <div class="item">Cyber Crime &nbsp;<strong>1930</strong></div>
+  <div class="item">Child Helpline &nbsp;<strong>1098</strong></div>
+  <div class="item">Legal Aid &nbsp;<strong>15100</strong></div>
+</div>
+
+<!-- Features -->
+<div class="container my-5">
+  <div class="text-center mb-4">
+    <div class="section-label">What We Offer</div>
+    <h3 class="page-title">Complete Legal Assistance Platform</h3>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>AI Legal Chatbot</h5>
+        <p>Get instant answers to your legal questions using our AI assistant trained on Indian legal procedures.</p>
+        <a href="/chat_page" style="color:var(--navy);font-weight:600;font-size:0.85rem;">Start Chat &rarr;</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>Legal Guidance</h5>
+        <p>Step-by-step guidance for FIR, cybercrime, domestic violence, consumer complaints, RTI and more.</p>
+        <a href="/guidance_page" style="color:var(--navy);font-weight:600;font-size:0.85rem;">View Guidance &rarr;</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>Submit a Query</h5>
+        <p>Submit your legal question and our ML classifier will automatically detect your case category and provide guidance.</p>
+        <a href="/query_page" style="color:var(--navy);font-weight:600;font-size:0.85rem;">Ask Now &rarr;</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>Police Station Locator</h5>
+        <p>Find contact details of nearby police stations and legal authorities across Maharashtra.</p>
+        <a href="/chat_page" style="color:var(--navy);font-weight:600;font-size:0.85rem;">Find Contacts &rarr;</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>Data Science Dashboard</h5>
+        <p>View real-time statistics, ML model performance, and data insights from our legal query database.</p>
+        <a href="/dashboard" style="color:var(--navy);font-weight:600;font-size:0.85rem;">View Dashboard &rarr;</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-card">
+        <h5>Secure &amp; Private</h5>
+        <p>Your queries and personal information are protected with hashed passwords and secure database storage.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login / Register -->
+<div class="container mb-5" id="loginSection">
+  <div class="login-card">
+    <div class="text-center mb-4">
+      <div class="section-label">Account</div>
+      <h4 class="page-title" style="font-size:1.3rem;">Login or Register</h4>
+    </div>
+    <div class="d-flex border-bottom mb-4">
+      <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" id="registerTab" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login form -->
+    <div id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com">
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="loginPassword" placeholder="Enter password">
+      </div>
+      <button class="btn-primary-custom w-100" onclick="doLogin()">Login</button>
+    </div>
+
+    <!-- Register form -->
+    <div id="registerForm" style="display:none;">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="regName" placeholder="Your full name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="regEmail" placeholder="your@email.com">
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="regPassword" placeholder="Create a password">
+      </div>
+      <button class="btn-primary-custom w-100" onclick="doRegister()">Create Account</button>
+    </div>
+
+    <div id="authMsg" class="text-center mt-3 fw-bold" style="display:none;font-size:0.88rem;"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Case Guide India &mdash; Final Year Project &mdash; BSc Data Science 2025-26 &mdash;
+  <strong>Shree L.R. Tiwari Degree College</strong></p>
+</footer>
+
+<!-- SHARED JS — paste at bottom of all files before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- About Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:14px;border:none;overflow:hidden;">
+      <div class="modal-header text-white"
+           style="background:var(--navy);border-bottom:2px solid var(--gold);">
+        <h6 class="modal-title" style="font-family:'Playfair Display',serif;letter-spacing:1px;">
+          About Case Guide India
+        </h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4" style="font-size:0.88rem;line-height:1.8;">
+        <p class="text-muted mb-3">
+          An AI-powered legal assistance system designed to help Indian citizens
+          understand their legal rights and navigate the legal system efficiently.
+        </p>
+        <hr class="gold-divider">
+        <table class="table table-borderless table-sm mb-3" style="font-size:0.87rem;">
+          <tr><td class="text-muted" style="width:110px;">Developed by</td>
+              <td><strong>Janvi R. Patil &amp; Ankita S. Ratan</strong></td></tr>
+          <tr><td class="text-muted">College</td>
+              <td>Shree L.R. Tiwari Degree College, Mira Road</td></tr>
+          <tr><td class="text-muted">Course</td>
+              <td>BSc Data Science — Final Year 2025-26</td></tr>
+          <tr><td class="text-muted">ML Model</td>
+              <td>Logistic Regression — 68.8% Accuracy</td></tr>
+          <tr><td class="text-muted">Database</td>
+              <td>PostgreSQL — 18 Tables</td></tr>
+        </table>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="badge" style="background:var(--navy);">Python Flask</span>
+          <span class="badge bg-success">PostgreSQL</span>
+          <span class="badge bg-danger">Machine Learning</span>
+          <span class="badge" style="background:var(--gold);color:var(--navy);">TF-IDF</span>
+          <span class="badge bg-secondary">Bootstrap 5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener("load", function(){
+  let username = localStorage.getItem("username")
+  if(username){
+    document.getElementById("dotUsername").textContent    = username
+    document.getElementById("dotLogoutLi").style.display = "block"
+    document.getElementById("dotLoginLi").style.display  = "none"
+  }
+})
+function logoutUser(){
+  fetch("/logout",{method:"POST"}).finally(()=>{
+    localStorage.removeItem("username")
+    localStorage.removeItem("user_id")
+    window.location.href="/"
+  })
+}
+function showAbout(){
+  new bootstrap.Modal(document.getElementById("aboutModal")).show()
+}
+</script>
+<script>
+function switchTab(tab){
+  document.getElementById('loginForm').style.display    = tab==='login'    ? 'block' : 'none'
+  document.getElementById('registerForm').style.display = tab==='register' ? 'block' : 'none'
+  document.getElementById('loginTab').classList.toggle('active',    tab==='login')
+  document.getElementById('registerTab').classList.toggle('active', tab==='register')
+}
+function showMsg(msg, ok){
+  let el = document.getElementById('authMsg')
+  el.textContent  = msg
+  el.style.color  = ok ? '#198754' : '#dc3545'
+  el.style.display = 'block'
+}
+function doLogin(){
+  let email    = document.getElementById('loginEmail').value.trim()
+  let password = document.getElementById('loginPassword').value.trim()
+  if(!email||!password){ showMsg('Please fill in all fields.', false); return }
+  fetch('/login',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email,password})})
+  .then(r=>r.json()).then(d=>{
+    if(d.user_id){
+      localStorage.setItem('username', d.username || email)
+      localStorage.setItem('user_id', d.user_id)
+      showMsg('Login successful! Redirecting...', true)
+      setTimeout(()=>window.location.href='/guidance_page', 1200)
+    } else { showMsg(d.message || 'Login failed.', false) }
+  }).catch(()=>showMsg('Server error. Please try again.', false))
+}
+function doRegister(){
+  let name     = document.getElementById('regName').value.trim()
+  let email    = document.getElementById('regEmail').value.trim()
+  let password = document.getElementById('regPassword').value.trim()
+  if(!name||!email||!password){ showMsg('Please fill in all fields.', false); return }
+  fetch('/signup',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({username:name, email, password})})
+  .then(r=>r.json()).then(d=>{
+    if(d.message && d.message.toLowerCase().includes('success')){
+      showMsg('Account created! Please login.', true)
+      switchTab('login')
+    } else { showMsg(d.message || 'Registration failed.', false) }
+  }).catch(()=>showMsg('Server error. Please try again.', false))
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

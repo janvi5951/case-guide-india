@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Case Guide India</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --navy:   #0f1628;
+  --navy2:  #1a2540;
+  --gold:   #c9943a;
+  --gold2:  #e8b55a;
+  --cream:  #faf7f2;
+  --white:  #ffffff;
+  --text:   #1c2333;
+  --muted:  #7a8499;
+  --border: rgba(201,148,58,0.18);
+  --shadow: 0 4px 32px rgba(15,22,40,0.10);
+  --shadow-sm: 0 2px 12px rgba(15,22,40,0.07);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 0.93rem;
+  min-height: 100vh;
+}
+
+/* ── HEADER ─────────────────────────────── */
+.site-header {
+  background: var(--navy);
+  border-bottom: 2px solid var(--gold);
+  padding: 20px 0 16px;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(201,148,58,0.12), transparent);
+  pointer-events: none;
+}
+.site-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #fff;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+.site-header p {
+  color: var(--gold2);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 5px 0 0;
+  font-weight: 500;
+}
+
+/* ── NAV ─────────────────────────────────── */
+.site-nav {
+  background: #0b1020;
+  border-bottom: 1px solid rgba(201,148,58,0.1);
+}
+.site-nav .nav-link {
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 0.82rem;
+  padding: 14px 16px !important;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  transition: color 0.2s;
+  position: relative;
+}
+.site-nav .nav-link:hover { color: var(--gold2) !important; }
+.site-nav .nav-link.active { color: var(--gold2) !important; }
+.site-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px 2px 0 0;
+}
+
+.dots-btn {
+  background: none;
+  border: 1px solid rgba(201,148,58,0.3);
+  color: var(--gold2);
+  border-radius: 8px;
+  padding: 5px 13px;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.dots-btn:hover { border-color: var(--gold); background: rgba(201,148,58,0.08); }
+
+.profile-dropdown {
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 12px 40px rgba(15,22,40,0.14) !important;
+  padding: 8px !important;
+  min-width: 220px !important;
+  background: var(--white) !important;
+}
+.profile-dropdown .dropdown-item {
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.profile-dropdown .dropdown-item:hover { background: #f5f3ee; }
+.user-info-box {
+  background: linear-gradient(135deg, #f7f3eb, #fdf9f3);
+  border-radius: 9px;
+  padding: 11px 14px;
+  margin-bottom: 4px;
+  border: 1px solid rgba(201,148,58,0.15);
+}
+.user-info-box .label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.user-info-box .username { font-weight: 700; color: var(--navy); font-size: 0.9rem; margin-top: 3px; }
+
+/* ── MAIN LAYOUT ─────────────────────────── */
+.main-wrap { max-width: 1120px; margin: 0 auto; padding: 38px 20px 70px; }
+
+/* ── PAGE HEADING ────────────────────────── */
+.page-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.page-heading .eyebrow {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.page-heading h2 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--navy);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.page-heading .sub {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+.ask-btn {
+  background: var(--navy);
+  color: var(--gold2);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.ask-btn:hover { background: var(--gold); color: var(--navy); }
+
+/* ── LOGIN BANNER ────────────────────────── */
+.login-banner {
+  display: none;
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 38px 36px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.login-banner h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold2);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.login-banner p { color: rgba(255,255,255,0.6); font-size: 0.88rem; margin-bottom: 0; }
+.login-banner a {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 11px 30px;
+  border-radius: 9px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: background 0.2s;
+}
+.login-banner a:hover { background: var(--gold2); }
+
+/* ── STAT CARDS ──────────────────────────── */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+@media(max-width:768px){ .stats-grid { grid-template-columns: repeat(2,1fr); } }
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 24px 20px 20px;
+  border: 1px solid rgba(201,148,58,0.12);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+}
+.stat-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.stat-card .number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-card .number.sm { font-size: 1.15rem; padding-top: 6px; line-height: 1.3; }
+.stat-card .label {
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.stat-card .sublabel {
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+/* ── GLASS CARDS ─────────────────────────── */
+.dash-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid rgba(201,148,58,0.1);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 14px;
+  border-bottom: 1px solid #f2ede4;
+}
+.card-head-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-head-title .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.card-head-link {
+  font-size: 0.75rem;
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  transition: all 0.15s;
+}
+.card-head-link:hover { background: var(--navy); color: var(--gold2); border-color: var(--navy); }
+
+.card-body-pad { padding: 20px 24px; }
+
+/* ── QUERY HISTORY ───────────────────────── */
+.query-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f0e8;
+  transition: all 0.15s;
+}
+.query-item:last-child { border-bottom: none; }
+.query-item:hover { background: #fdfaf5; margin: 0 -24px; padding: 14px 24px; border-radius: 0; }
+
+.q-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  font-weight: 500;
+  padding-top: 2px;
+  flex-shrink: 0;
+  width: 22px;
+}
+.q-content { flex: 1; min-width: 0; }
+.q-text {
+  font-size: 0.875rem;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.45;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.q-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cat-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+.date-text { font-size: 0.72rem; color: var(--muted); }
+
+/* ── CATEGORY COLORS ─────────────────────── */
+.cat-cybercrime   { background:#e8f0fa; color:#1a4480; }
+.cat-domestic     { background:#fceaea; color:#8b1a1a; }
+.cat-women        { background:#fce8f3; color:#8b1a5e; }
+.cat-fir          { background:#e8f5ec; color:#1a5c2e; }
+.cat-consumer     { background:#fdf3e3; color:#7a4410; }
+.cat-rti          { background:#ece8fa; color:#3b1a7a; }
+.cat-property     { background:#e3edf5; color:#1a3a5c; }
+.cat-legal        { background:#e8f5f0; color:#1a5c47; }
+.cat-child        { background:#fdf0e8; color:#7a2a10; }
+.cat-general      { background:#f0f0f0; color:#444; }
+
+/* ── FREQUENT TOPICS ─────────────────────── */
+.freq-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid #f5f0e8;
+}
+.freq-item:last-child { border-bottom: none; }
+.freq-rank {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gold);
+  width: 22px;
+  flex-shrink: 0;
+  text-align: center;
+}
+.freq-bar-wrap { flex: 1; }
+.freq-name { font-size: 0.86rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.freq-tip  { font-size: 0.73rem; color: var(--muted); }
+.freq-bar  { height: 4px; background: #f0ece4; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+.freq-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--gold), var(--gold2)); transition: width 1.2s cubic-bezier(.22,1,.36,1); }
+.freq-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--navy);
+  white-space: nowrap;
+  background: #f7f3eb;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+/* ── LIVE BARS ───────────────────────────── */
+.live-bar-wrap { margin-bottom: 14px; }
+.live-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.81rem;
+  margin-bottom: 5px;
+}
+.live-bar-label .cat-name { font-weight: 600; color: var(--navy); }
+.live-bar-label .cat-info { font-size: 0.74rem; color: var(--muted); }
+.live-bar { height: 6px; background: #f0ece4; border-radius: 4px; overflow: hidden; }
+.live-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
+
+.live-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: #e84040;
+  border-radius: 50%;
+  margin-right: 4px;
+  animation: pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:0.4; transform:scale(0.7); }
+}
+
+/* ── RESOURCES ───────────────────────────── */
+.resource-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f0e8;
+}
+.resource-item:last-child { border-bottom: none; }
+.res-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f7f2e8, #fdf7ee);
+  border: 1px solid rgba(201,148,58,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.res-title { font-size: 0.84rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.res-desc  { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
+
+/* ── FOOTER ──────────────────────────────── */
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 22px;
+  font-size: 0.78rem;
+  border-top: 2px solid var(--gold);
+}
+.site-footer strong { color: var(--gold2); }
+
+/* ── MODAL ───────────────────────────────── */
+.about-modal .modal-content {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(15,22,40,0.2);
+}
+.about-modal .modal-header {
+  background: var(--navy);
+  border-bottom: 2px solid var(--gold);
+  padding: 18px 24px;
+}
+.about-modal .modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+/* ── ANIMATIONS ──────────────────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.stat-card { animation: fadeUp 0.5s both; }
+.stat-card:nth-child(1){ animation-delay:0.05s }
+.stat-card:nth-child(2){ animation-delay:0.10s }
+.stat-card:nth-child(3){ animation-delay:0.15s }
+.stat-card:nth-child(4){ animation-delay:0.20s }
+
+.gold-divider { height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); border:none; margin:16px 0; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="container text-center">
+    <h1>Case Guide India</h1>
+    <p>AI-Powered Legal Assistance System</p>
+  </div>
+</header>
+
+<!-- ── NAV ── -->
+<nav class="navbar navbar-expand-lg site-nav">
+  <div class="container">
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" style="color:rgba(255,255,255,0.7);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/guidance_page">Guidance</a></li>
+        <li class="nav-item"><a class="nav-link" href="/query_page">Ask Query</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chat_page">Chat</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/feedback_page">Feedback</a></li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <button class="dots-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-offset="0,8">&bull;&bull;&bull;</button>
+      <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+        <li>
+          <div class="user-info-box">
+            <div class="label">Logged in as</div>
+            <div class="username" id="dotUsername">Guest</div>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0ece4;"></li>
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+        <li><a class="dropdown-item" href="/chat_page">AI Chatbot</a></li>
+        <li><a class="dropdown-item" href="/feedback_page">Feedback</a></li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0ece4;"></li>
+        <li><a class="dropdown-item" href="#" onclick="showAbout()">About Project</a></li>
+        <li id="dotLogoutLi" style="display:none;">
+          <a class="dropdown-item" href="#" onclick="logoutUser()" style="color:#c0392b;">Logout</a>
+        </li>
+        <li id="dotLoginLi">
+          <a class="dropdown-item" href="/" style="color:#1a4a8b;">Login / Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<div class="main-wrap">
+
+  <!-- Page Heading -->
+  <div class="page-heading">
+    <div>
+      <div class="eyebrow">My Activity</div>
+      <h2 id="dashWelcome">My Dashboard</h2>
+      <p class="sub">Track your legal queries, activity history and most helpful resources.</p>
+    </div>
+    <a href="/query_page" class="ask-btn">+ Ask New Query →</a>
+  </div>
+
+  <!-- Not Logged In Banner -->
+  <div class="login-banner" id="loginBanner">
+    <h4>Please Login to See Your Dashboard</h4>
+    <p>Your personal query history and activity stats will appear here once you log in.</p>
+    <a href="/">Login / Sign Up →</a>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stats-grid" id="statsRow">
+    <div class="stat-card">
+      <span class="icon">📋</span>
+      <div class="number" id="statQueries">--</div>
+      <div class="label">Total Queries</div>
+      <div class="sublabel">asked by you</div>
+    </div>
+    <div class="stat-card">
+      <span class="icon">📅</span>
+      <div class="number" id="statDays">--</div>
+      <div class="label">Days Active</div>
+      <div class="sublabel">on this platform</div>
+    </div>
+    <div class="stat-card">
+      <span class="icon">🏷️</span>
+      <div class="number sm" id="statTopCat">--</div>
+      <div class="label">Most Asked</div>
+      <div class="sublabel">top category</div>
+    </div>
+    <div class="stat-card">
+      <span class="icon">💬</span>
+      <div class="number" id="statChats">--</div>
+      <div class="label">Chat Messages</div>
+      <div class="sublabel">sent in AI chat</div>
+    </div>
+  </div>
+
+  <!-- TWO-COLUMN GRID -->
+  <div class="row g-4">
+
+    <!-- LEFT -->
+    <div class="col-lg-7">
+
+      <!-- My Query History -->
+      <div class="dash-card mb-4">
+        <div class="card-head">
+          <div class="card-head-title">
+            <span class="dot"></span> My Query History
+          </div>
+          <a href="/query_page" class="card-head-link">+ Ask New →</a>
+        </div>
+        <div class="card-body-pad" id="queryHistoryList">
+          <div class="text-center text-muted py-4" style="font-size:0.84rem;">Loading your queries...</div>
+        </div>
+      </div>
+
+      <!-- Frequent Topics -->
+      <div class="dash-card">
+        <div class="card-head">
+          <div class="card-head-title">
+            <span class="dot"></span> Your Most Frequent Topics
+          </div>
+        </div>
+        <div class="card-body-pad" id="frequentTopics">
+          <div class="text-center text-muted py-4" style="font-size:0.84rem;">Loading...</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-lg-5">
+
+      <!-- Live Stats -->
+      <div class="dash-card mb-4">
+        <div class="card-head">
+          <div class="card-head-title">
+            <span class="live-dot"></span> Live Platform Queries
+          </div>
+          <span id="liveLastUpdated" style="font-size:0.7rem;color:var(--gold);font-weight:600;font-family:'DM Mono',monospace;"></span>
+        </div>
+        <div class="card-body-pad">
+          <div style="font-size:0.77rem;color:var(--muted);margin-bottom:14px;">Most queried legal topics across all users right now</div>
+          <div id="liveBars">
+            <div class="text-center text-muted py-3" style="font-size:0.84rem;">Loading live data...</div>
+          </div>
+          <div style="margin-top:14px;font-size:0.72rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;">
+            <span>🔄 Auto-refreshes every 30s</span>
+            <a href="#" onclick="loadLiveStats();return false;" style="color:var(--navy);font-weight:700;font-size:0.72rem;">Refresh now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources -->
+      <div class="dash-card">
+        <div class="card-head">
+          <div class="card-head-title">
+            <span class="dot"></span> Most Helpful Resources
+          </div>
+        </div>
+        <div class="card-body-pad">
+          <div class="resource-item">
+            <div class="res-icon">🚔</div>
+            <div>
+              <div class="res-title">File an FIR Online</div>
+              <div class="res-desc">Visit your state police portal or nearest station. Keep evidence ready.</div>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon">🖥️</div>
+            <div>
+              <div class="res-title">Cybercrime Helpline — 1930</div>
+              <div class="res-desc">Report UPI fraud, hacking, online scams 24×7 at cybercrime.gov.in</div>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon">👮‍♀️</div>
+            <div>
+              <div class="res-title">Women Helpline — 1091</div>
+              <div class="res-desc">Domestic violence, harassment, safety emergencies. Free & confidential.</div>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon">⚖️</div>
+            <div>
+              <div class="res-title">Free Legal Aid — NALSA 15100</div>
+              <div class="res-desc">Free legal help for all citizens. Available in Hindi & Marathi.</div>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon">📋</div>
+            <div>
+              <div class="res-title">RTI — Right to Information</div>
+              <div class="res-desc">File RTI online at rtionline.gov.in for just ₹10.</div>
+            </div>
+          </div>
+          <div class="resource-item">
+            <div class="res-icon">👶</div>
+            <div>
+              <div class="res-title">Childline — 1098</div>
+              <div class="res-desc">24×7 helpline for children in distress. Free & confidential.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <p>Case Guide India &mdash; Final Year Project &mdash; BSc Data Science 2025–26 &mdash; <strong>Shree L.R. Tiwari Degree College</strong></p>
+</footer>
+
+<!-- About Modal -->
+<div class="modal fade about-modal" id="aboutModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title">About Case Guide India</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4" style="font-size:0.87rem;line-height:1.8;">
+        <p class="text-muted mb-3">An AI-powered legal assistance system designed to help Indian citizens understand their legal rights and navigate the legal system efficiently.</p>
+        <hr class="gold-divider">
+        <table class="table table-borderless table-sm mb-3" style="font-size:0.86rem;">
+          <tr><td class="text-muted" style="width:110px;">Developed by</td><td><strong>Janvi R. Patil &amp; Ankita S. Ratan</strong></td></tr>
+          <tr><td class="text-muted">College</td><td>Shree L.R. Tiwari Degree College, Mira Road</td></tr>
+          <tr><td class="text-muted">Course</td><td>BSc Data Science — Final Year 2025–26</td></tr>
+          <tr><td class="text-muted">ML Model</td><td>Linear SVM — 70.8% Accuracy</td></tr>
+          <tr><td class="text-muted">Database</td><td>PostgreSQL — 18 Tables</td></tr>
+        </table>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge" style="background:var(--navy);font-weight:500;">Python Flask</span>
+          <span class="badge bg-success" style="font-weight:500;">PostgreSQL</span>
+          <span class="badge bg-danger" style="font-weight:500;">Machine Learning</span>
+          <span class="badge" style="background:var(--gold);color:var(--navy);font-weight:600;">TF-IDF</span>
+          <span class="badge bg-secondary" style="font-weight:500;">Bootstrap 5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ── NAV ──────────────────────────────────────────────────────
+window.addEventListener('load', function(){
+  var username = localStorage.getItem('username')
+  if(username){
+    document.getElementById('dotUsername').textContent    = username
+    document.getElementById('dotLogoutLi').style.display = 'block'
+    document.getElementById('dotLoginLi').style.display  = 'none'
+  }
+})
+function logoutUser(){
+  fetch('/logout',{method:'POST'}).finally(function(){
+    localStorage.removeItem('username')
+    localStorage.removeItem('user_id')
+    window.location.href='/'
+  })
+}
+function showAbout(){ new bootstrap.Modal(document.getElementById('aboutModal')).show() }
+
+// ── CATEGORY BADGE CLASS ─────────────────────────────────────
+function catClass(cat){
+  var map = {
+    'Cybercrime':'cat-cybercrime','Domestic Violence':'cat-domestic',
+    'Women Safety':'cat-women','FIR':'cat-fir','Consumer':'cat-consumer',
+    'RTI':'cat-rti','Property':'cat-property','Legal Aid':'cat-legal',
+    'Child Safety':'cat-child','General':'cat-general'
+  }
+  return map[cat] || 'cat-general'
+}
+
+// ── LIVE STATS ───────────────────────────────────────────────
+function loadLiveStats(){
+  fetch('/live_stats')
+  .then(function(r){ return r.json() })
+  .then(function(data){
+    var el     = document.getElementById('liveBars')
+    var perCat = data.per_category || {}
+    if(!Object.keys(perCat).length){
+      el.innerHTML = '<div class="text-center text-muted py-4" style="font-size:0.84rem;">📭 No queries yet.</div>'
+      return
+    }
+    var sorted   = Object.keys(perCat).sort(function(a,b){ return perCat[b].count - perCat[a].count })
+    var maxCount = Math.max.apply(null, sorted.map(function(c){ return perCat[c].count }))
+    var html = ''
+    sorted.forEach(function(cat){
+      var d      = perCat[cat]
+      var barPct = Math.round((d.count / maxCount) * 100)
+      var conf   = d.avg_conf !== null ? d.avg_conf + '%' : 'N/A'
+      var fill   = (d.avg_conf||0)>=75 ? 'linear-gradient(90deg,#1a5c2e,#40916c)'
+                 : (d.avg_conf||0)>=50 ? 'linear-gradient(90deg,var(--gold),var(--gold2))'
+                 : 'linear-gradient(90deg,#8b1a1a,#c0392b)'
+      html += '<div class="live-bar-wrap">' +
+        '<div class="live-bar-label">' +
+          '<span class="cat-name">'+cat+'</span>' +
+          '<span class="cat-info">'+d.count+' queries &nbsp;🎯 '+conf+'</span>' +
+        '</div>' +
+        '<div class="live-bar"><div class="live-fill" style="width:'+barPct+'%;background:'+fill+';"></div></div>' +
+        '</div>'
+    })
+    el.innerHTML = html
+    var now = new Date()
+    document.getElementById('liveLastUpdated').textContent =
+      now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})
+  })
+  .catch(function(){
+    document.getElementById('liveBars').innerHTML =
+      '<div class="text-center text-danger py-3" style="font-size:0.84rem;">Could not load. Start the server.</div>'
+  })
+}
+setInterval(loadLiveStats, 30000)
+loadLiveStats()
+
+// ── USER DASHBOARD ───────────────────────────────────────────
+var storedName = localStorage.getItem('username') || ''
+fetch('/user_dashboard?name=' + encodeURIComponent(storedName))
+.then(function(r){
+  if(r.status === 401) throw new Error('not_logged_in')
+  return r.json()
+})
+.then(function(data){
+  document.getElementById('dashWelcome').textContent = 'Welcome back, ' + data.username + '!'
+
+  document.getElementById('statQueries').textContent = data.total_queries || 0
+  document.getElementById('statDays').textContent    = data.days_active   || 0
+  document.getElementById('statTopCat').textContent  = data.top_category  || '—'
+  document.getElementById('statChats').textContent   = data.total_chats   || 0
+
+  // ── Query History ──────────────────────────────────────
+  var histDiv = document.getElementById('queryHistoryList')
+  var recent  = data.recent || []
+  if(!recent.length){
+    histDiv.innerHTML = '<div class="text-center text-muted py-5" style="font-size:0.85rem;">' +
+      'You have not asked any queries yet.<br><br>' +
+      '<a href="/query_page" style="color:var(--navy);font-weight:700;border:1px solid var(--border);padding:8px 20px;border-radius:8px;text-decoration:none;">Ask your first query →</a>' +
+      '</div>'
+  } else {
+    var html = ''
+    recent.forEach(function(q, i){
+      var dateStr = '--'
+      try{
+        var d = new Date(q.created_at)
+        if(!isNaN(d)) dateStr = d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})
+      }catch(e){}
+      var qText = q.query.length > 82 ? q.query.substring(0,82)+'…' : q.query
+      var num   = String(i+1).padStart(2,'0')
+      html += '<div class="query-item">' +
+        '<div class="q-num">'+num+'</div>' +
+        '<div class="q-content">' +
+          '<div class="q-text">'+qText+'</div>' +
+          '<div class="q-meta">' +
+            '<span class="cat-badge '+catClass(q.category)+'">'+q.category+'</span>' +
+            '<span class="date-text">'+dateStr+'</span>' +
+          '</div>' +
+        '</div>' +
+        '</div>'
+    })
+    histDiv.innerHTML = html
+  }
+
+  // ── Frequent Topics ────────────────────────────────────
+  var freqDiv = document.getElementById('frequentTopics')
+  var cats    = data.categories || {}
+  var keys    = Object.keys(cats).sort(function(a,b){ return cats[b]-cats[a] })
+  if(!keys.length){
+    freqDiv.innerHTML = '<div class="text-center text-muted py-4" style="font-size:0.84rem;">No topics yet. Start asking queries!</div>'
+  } else {
+    var maxCnt = cats[keys[0]] || 1
+    var tips   = {
+      'Cybercrime':'Call 1930 or visit cybercrime.gov.in',
+      'Domestic Violence':'Call 1091 — Women Helpline',
+      'Women Safety':'Call 112 or 1091 for immediate help',
+      'FIR':'Visit nearest police station with evidence',
+      'Consumer':'File at edaakhil.nic.in or Consumer Forum',
+      'RTI':'File at rtionline.gov.in — ₹10 fee',
+      'Property':'Consult a civil lawyer or RERA portal',
+      'Legal Aid':'Call NALSA helpline 15100 — Free!',
+      'Child Safety':'Call Childline 1098 — 24×7 free',
+      'General':'Call NALSA 15100 for free guidance'
+    }
+    var html = ''
+    keys.slice(0,6).forEach(function(cat, i){
+      var count  = cats[cat]
+      var barPct = Math.round((count / maxCnt) * 100)
+      var tip    = tips[cat] || 'Use AI Chat for instant guidance'
+      html += '<div class="freq-item">' +
+        '<div class="freq-rank">'+(i<9?'0':'')+(i+1)+'</div>' +
+        '<div class="freq-bar-wrap">' +
+          '<div class="freq-name">'+cat+'</div>' +
+          '<div class="freq-tip">💡 '+tip+'</div>' +
+          '<div class="freq-bar"><div class="freq-fill" style="width:'+barPct+'%;"></div></div>' +
+        '</div>' +
+        '<div class="freq-count">'+count+'×</div>' +
+        '</div>'
+    })
+    freqDiv.innerHTML = html
+  }
+})
+.catch(function(err){
+  if(err.message === 'not_logged_in'){
+    document.getElementById('loginBanner').style.display = 'block'
+    document.getElementById('statsRow').style.display    = 'none'
+    document.getElementById('dashWelcome').textContent   = 'My Dashboard'
+    document.getElementById('queryHistoryList').innerHTML =
+      '<div class="text-center text-muted py-4"><a href="/" style="color:var(--navy);font-weight:700;">Login to see your activity →</a></div>'
+    document.getElementById('frequentTopics').innerHTML =
+      '<div class="text-center text-muted py-4"><a href="/" style="color:var(--navy);font-weight:700;">Login to see your topics →</a></div>'
+  }
+})
+</script>
+
+</body>
+</html>

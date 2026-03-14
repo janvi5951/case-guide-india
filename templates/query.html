@@ -1,0 +1,507 @@
+!<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Query | Case Guide India</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:  #1a1a2e;
+    --gold:  #e8b04b;
+    --light: #f8f9fc;
+    --text:  #2d2d2d;
+    --muted: #888;
+    --card-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--light); color: var(--text); font-size: 0.95rem; }
+  h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
+
+  /* HEADER */
+  .site-header { background: var(--navy); border-bottom: 3px solid var(--gold); padding: 18px 0; text-align: center; }
+  .site-header h1 { font-family: 'Playfair Display', serif; color: white; font-size: 1.8rem; margin: 0; letter-spacing: 1px; }
+  .site-header p { color: var(--gold); margin: 4px 0 0; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* NAVBAR */
+  .site-nav { background: #12122a; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .site-nav .nav-link { color: rgba(255,255,255,0.75) !important; font-size: 0.87rem; padding: 12px 14px !important; letter-spacing: 0.3px; transition: color 0.2s; }
+  .site-nav .nav-link:hover, .site-nav .nav-link.active { color: var(--gold) !important; }
+  .dots-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; padding: 4px 12px; font-size: 1.3rem; line-height: 1; letter-spacing: 3px; cursor: pointer; transition: border-color 0.2s; }
+  .dots-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* DROPDOWN */
+  .profile-dropdown { border-radius: 12px !important; border: none !important; box-shadow: 0 8px 30px rgba(0,0,0,0.12) !important; padding: 8px !important; min-width: 210px !important; }
+  .profile-dropdown .dropdown-item { border-radius: 6px; padding: 8px 14px; font-size: 0.87rem; color: var(--text); transition: background 0.15s; }
+  .profile-dropdown .dropdown-item:hover { background: #f5f7ff; }
+  .user-info-box { background: #f5f7ff; border-radius: 8px; padding: 10px 14px; margin-bottom: 4px; }
+  .user-info-box .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .user-info-box .username { font-weight: 700; color: var(--navy); font-size: 0.9rem; margin-top: 2px; }
+
+  /* CARDS */
+  .content-card { background: white; border-radius: 14px; box-shadow: var(--card-shadow); padding: 32px; }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 6px; }
+  .page-title { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.6rem; margin-bottom: 6px; }
+  .page-subtitle { color: var(--muted); font-size: 0.88rem; margin-bottom: 28px; }
+
+  /* FORM */
+  .form-label { font-weight: 600; font-size: 0.87rem; color: var(--text); }
+  .form-control, .form-select { border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; transition: border-color 0.2s; }
+  .form-control:focus, .form-select:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(26,26,46,0.07); }
+  .btn-primary-custom { background: var(--navy); color: white; border: none; border-radius: 8px; padding: 11px 28px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.3px; transition: background 0.2s, transform 0.1s; cursor: pointer; }
+  .btn-primary-custom:hover { background: #2d2d5e; transform: translateY(-1px); }
+  .btn-primary-custom:disabled { background: #888; transform: none; }
+
+  /* FOOTER */
+  .site-footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 18px; font-size: 0.8rem; margin-top: 60px; border-top: 2px solid var(--gold); }
+  .site-footer strong { color: var(--gold); }
+
+  /* GOLD DIVIDER */
+  .gold-divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); border: none; margin: 24px 0; }
+
+  /* ML PREVIEW */
+  .ml-preview { display: none; background: #f5f7ff; border: 1.5px solid #c5d0ff; border-radius: 10px; padding: 14px 18px; margin-top: 10px; }
+  .ml-preview .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .cat-badge { display: inline-block; background: var(--navy); color: white; border-radius: 20px; padding: 3px 14px; font-size: 0.83rem; font-weight: 600; }
+  .conf-bar { height: 6px; background: #dee2e6; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+  .conf-fill { height: 100%; background: linear-gradient(90deg, var(--navy), #4a4a8e); border-radius: 3px; transition: width 0.5s ease; }
+  .priority-badge { border-radius: 5px; padding: 3px 10px; font-size: 0.75rem; font-weight: 600; }
+
+  /* ANSWER BOX */
+  .answer-box { display: none; margin-top: 28px; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); }
+  .answer-header { background: var(--navy); color: white; padding: 14px 22px; font-weight: 600; font-size: 0.9rem; }
+  .answer-body { background: white; padding: 22px; }
+  .steps-text { background: #f8f9fc; border-left: 3px solid var(--navy); padding: 14px 18px; border-radius: 0 8px 8px 0; white-space: pre-line; line-height: 2; font-size: 0.88rem; margin-top: 8px; }
+  .helpline-row { background: #fffbee; border: 1px solid #f0d080; border-radius: 8px; padding: 12px 16px; font-size: 0.83rem; margin-top: 14px; color: #555; }
+  .helpline-row strong { color: var(--navy); }
+  .saved-note { display: inline-block; background: #edfaf1; border: 1px solid #a8d5b5; border-radius: 6px; padding: 6px 14px; font-size: 0.8rem; color: #2d6a4f; margin-top: 12px; }
+
+  /* HELP CENTERS */
+  .help-item { display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border:1px solid #eee; border-radius:8px; margin-bottom:8px; font-size:0.84rem; }
+  .help-item:last-child { margin-bottom:0; }
+  .help-icon { font-size:1.3rem; }
+  .help-name { font-weight:700; color:var(--navy); }
+  .help-addr { color:var(--muted); font-size:0.78rem; margin-top:2px; }
+  .help-phone { color:#2d6a4f; font-weight:600; font-size:0.8rem; margin-top:3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Case Guide India</h1>
+  <p>AI-Powered Legal Assistance System</p>
+</header>
+
+<nav class="navbar navbar-expand-lg site-nav">
+  <div class="container">
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" style="color:white;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/" id="nl-home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/guidance_page" id="nl-guidance">Guidance</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/query_page" id="nl-query">Ask Query</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chat_page" id="nl-chat">Chat</a></li>
+        <li class="nav-item"><a class="nav-link" href="/dashboard" id="nl-dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/feedback_page" id="nl-feedback">Feedback</a></li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <button class="dots-btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-offset="0,8">&bull;&bull;&bull;</button>
+      <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+        <li>
+          <div class="user-info-box">
+            <div class="label">Logged in as</div>
+            <div class="username" id="dotUsername">Guest</div>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0f0f0;"></li>
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+        <li><a class="dropdown-item" href="/chat_page">AI Chatbot</a></li>
+        <li><a class="dropdown-item" href="/feedback_page">Feedback</a></li>
+        <li><hr class="dropdown-divider" style="margin:6px 0;border-color:#f0f0f0;"></li>
+        <li><a class="dropdown-item" href="#" onclick="showAbout()">About Project</a></li>
+        <li id="dotLogoutLi" style="display:none;">
+          <a class="dropdown-item" href="#" onclick="logoutUser()" style="color:#dc3545;">Logout</a>
+        </li>
+        <li id="dotLoginLi">
+          <a class="dropdown-item" href="/" style="color:#0d6efd;">Login / Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="max-width:700px; margin-top:40px; margin-bottom:60px;">
+  <div class="content-card">
+    <div class="section-label">Legal Assistance</div>
+    <h2 class="page-title">Submit a Legal Query</h2>
+    <p class="page-subtitle">Our AI will classify your case and provide relevant legal guidance instantly.</p>
+
+    <!-- NAME -->
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="userName" placeholder="Enter your full name">
+    </div>
+
+    <!-- GENDER -->
+    <div class="mb-3" id="genderSection" style="background:#f5f7ff; border:1.5px solid #c5d0ff; border-radius:10px; padding:14px 18px;">
+      <label class="form-label" style="color:var(--navy);">Gender <span style="color:#dc3545;">*</span></label>
+      <div class="d-flex gap-4 mt-1">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="genderRadio" id="genderMale" value="Male">
+          <label class="form-check-label fw-semibold" for="genderMale">👨 Male</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="genderRadio" id="genderFemale" value="Female">
+          <label class="form-check-label fw-semibold" for="genderFemale">👩 Female</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="genderRadio" id="genderOther" value="Other">
+          <label class="form-check-label fw-semibold" for="genderOther">🧑 Other</label>
+        </div>
+      </div>
+      <div style="font-size:0.75rem; color:var(--muted); margin-top:6px;">Required — helps us give gender-specific legal advice</div>
+    </div>
+
+    <!-- QUERY TEXT -->
+    <div class="mb-3">
+      <label class="form-label">Describe Your Legal Problem</label>
+      <textarea class="form-control" id="queryText" rows="4"
+                placeholder="Describe your legal issue in detail..."
+                oninput="livePredict()"></textarea>
+
+      <div class="ml-preview" id="mlPreview">
+        <div class="label">ML Classifier — Real-time Analysis</div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <span style="font-size:0.83rem; color:var(--muted);">Detected Category:</span>
+          <span class="cat-badge" id="liveCategory">—</span>
+          <span class="priority-badge" id="livePriority"></span>
+        </div>
+        <div style="margin-top:8px; font-size:0.8rem; color:var(--muted);">
+          Confidence: <strong id="liveConfidence">0</strong>%
+        </div>
+        <div class="conf-bar"><div class="conf-fill" id="confFill" style="width:0%"></div></div>
+        <div style="margin-top:8px; font-size:0.8rem; color:#4a4a8e;" id="liveMessage"></div>
+      </div>
+    </div>
+
+    <!-- CATEGORY -->
+    <div class="mb-4">
+      <label class="form-label">Case Category <span style="font-weight:400; color:var(--muted);">(auto-detected above)</span></label>
+      <select class="form-select" id="queryCategory">
+        <option value="">Auto-detect from AI</option>
+        <option value="FIR">FIR / Police Complaint</option>
+        <option value="Cybercrime">Cybercrime</option>
+        <option value="Domestic Violence">Domestic Violence</option>
+        <option value="Consumer">Consumer Complaint</option>
+        <option value="RTI">RTI</option>
+        <option value="Property">Property Dispute</option>
+        <option value="Women Safety">Women Safety</option>
+        <option value="Legal Aid">Legal Aid</option>
+        <option value="Child Safety">Child Safety</option>
+        <option value="General">General</option>
+      </select>
+    </div>
+
+    <button class="btn-primary-custom w-100" id="submitBtn" onclick="submitQuery()">Submit Query</button>
+    <div id="errMsg" class="text-danger text-center mt-3 fw-bold" style="display:none;font-size:0.87rem;"></div>
+
+    <!-- ANSWER BOX -->
+    <div class="answer-box" id="answerBox">
+      <div class="answer-header">Query Answered</div>
+      <div class="answer-body">
+        <div id="catBadge" style="display:inline-block; background:var(--navy); color:white; border-radius:20px; padding:3px 14px; font-size:0.8rem; margin-bottom:14px;"></div>
+        <div class="fw-bold mb-1" style="font-size:0.87rem;">AI Response</div>
+        <div class="steps-text" id="aiAnswer"></div>
+
+        <div id="guidanceSection" style="display:none; margin-top:18px;">
+          <div class="fw-bold mb-1" style="font-size:0.87rem;">Step-by-Step Guidance</div>
+          <div class="steps-text" id="guidanceSteps"></div>
+          <div style="margin-top:10px; font-size:0.83rem;">
+            <span style="color:var(--muted);">Contact Authority: </span>
+            <span id="guidanceAuthority" style="background:#eef2ff; padding:3px 10px; border-radius:5px; font-weight:600; color:var(--navy);"></span>
+          </div>
+        </div>
+
+        <div class="helpline-row">
+          Emergency Helplines &mdash;
+          Police: <strong>100</strong> &nbsp;|&nbsp;
+          Women: <strong>1091</strong> &nbsp;|&nbsp;
+          Cyber: <strong>1930</strong> &nbsp;|&nbsp;
+          Child: <strong>1098</strong> &nbsp;|&nbsp;
+          Legal Aid: <strong>15100</strong>
+        </div>
+        <div class="saved-note">Your query has been saved to the database.</div>
+
+        <!-- NEARBY HELP CENTERS -->
+        <div id="helpCentersSection" style="display:none; margin-top:24px;">
+          <div style="background:var(--navy); color:white; padding:12px 20px; border-radius:10px 10px 0 0; font-weight:600; font-size:0.88rem;">
+            📍 Nearest Legal Help — <span id="helpCentersTitle">Mira Road / Mira Bhayandar</span>
+          </div>
+          <div id="helpCentersList" style="border:1.5px solid #e0e0e0; border-top:none; border-radius:0 0 10px 10px; background:white; padding:14px;">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Case Guide India &mdash; Final Year Project &mdash; BSc Data Science 2025-26 &mdash; <strong>Shree L.R. Tiwari Degree College</strong></p>
+</footer>
+
+<!-- BOOTSTRAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ABOUT MODAL -->
+<div class="modal fade" id="aboutModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:14px;border:none;overflow:hidden;">
+      <div class="modal-header text-white" style="background:var(--navy);border-bottom:2px solid var(--gold);">
+        <h6 class="modal-title" style="font-family:'Playfair Display',serif;letter-spacing:1px;">About Case Guide India</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4" style="font-size:0.88rem;line-height:1.8;">
+        <p class="text-muted mb-3">An AI-powered legal assistance system designed to help Indian citizens understand their legal rights and navigate the legal system efficiently.</p>
+        <hr class="gold-divider">
+        <table class="table table-borderless table-sm mb-3" style="font-size:0.87rem;">
+          <tr><td class="text-muted" style="width:110px;">Developed by</td><td><strong>Janvi R. Patil &amp; Ankita S. Ratan</strong></td></tr>
+          <tr><td class="text-muted">College</td><td>Shree L.R. Tiwari Degree College, Mira Road</td></tr>
+          <tr><td class="text-muted">Course</td><td>BSc Data Science — Final Year 2025-26</td></tr>
+          <tr><td class="text-muted">ML Model</td><td>Linear SVM — 70.8% Accuracy</td></tr>
+          <tr><td class="text-muted">Database</td><td>PostgreSQL — 18 Tables</td></tr>
+        </table>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="badge" style="background:var(--navy);">Python Flask</span>
+          <span class="badge bg-success">PostgreSQL</span>
+          <span class="badge bg-danger">Machine Learning</span>
+          <span class="badge" style="background:var(--gold);color:var(--navy);">TF-IDF</span>
+          <span class="badge bg-secondary">Bootstrap 5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHARED JS -->
+<script>
+window.addEventListener("load", function(){
+  let username = localStorage.getItem("username")
+  if(username){
+    document.getElementById("dotUsername").textContent    = username
+    document.getElementById("dotLogoutLi").style.display = "block"
+    document.getElementById("dotLoginLi").style.display  = "none"
+  }
+})
+function logoutUser(){
+  fetch("/logout",{method:"POST"}).finally(()=>{
+    localStorage.removeItem("username")
+    localStorage.removeItem("user_id")
+    window.location.href="/"
+  })
+}
+function showAbout(){
+  new bootstrap.Modal(document.getElementById("aboutModal")).show()
+}
+</script>
+
+<!-- QUERY JS -->
+<script>
+let typingTimer = null
+function livePredict(){
+  let q = document.getElementById('queryText').value.trim()
+  if(q.length < 5){ document.getElementById('mlPreview').style.display='none'; return }
+  clearTimeout(typingTimer)
+  typingTimer = setTimeout(function(){
+    fetch('/classify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})})
+    .then(r=>r.json()).then(data=>{
+      document.getElementById('mlPreview').style.display    = 'block'
+      document.getElementById('liveCategory').textContent   = data.category
+      document.getElementById('liveConfidence').textContent = data.confidence
+      document.getElementById('liveMessage').textContent    = data.message||''
+      document.getElementById('confFill').style.width       = data.confidence+'%'
+      let pmap = {
+        'Domestic Violence': ['High Priority','danger'],
+        'Women Safety':      ['High Priority','danger'],
+        'Child Safety':      ['High Priority','danger'],
+        'Cybercrime':        ['Medium Priority','warning'],
+        'FIR':               ['Medium Priority','warning']
+      }
+      let [label,color] = pmap[data.category]||['Normal','success']
+      let pb = document.getElementById('livePriority')
+      pb.textContent = label
+      pb.className   = 'priority-badge bg-'+color+' text-'+(color==='warning'?'dark':'white')
+      document.getElementById('queryCategory').value = data.category
+    }).catch(()=>{})
+  }, 600)
+}
+
+function submitQuery(){
+  let name     = document.getElementById('userName').value.trim()
+  let query    = document.getElementById('queryText').value.trim()
+  let cat      = document.getElementById('queryCategory').value
+  let genderEl = document.querySelector('input[name="genderRadio"]:checked')
+  let gender   = genderEl ? genderEl.value : ''
+  if(!name){ showErr('Please enter your name.'); return }
+  if(!gender){
+    document.getElementById('genderSection').scrollIntoView({behavior:'smooth', block:'center'})
+    document.getElementById('genderSection').style.border = '2px solid #dc3545'
+    setTimeout(()=>{ document.getElementById('genderSection').style.border = '1.5px solid #c5d0ff' }, 2000)
+    showErr('Please select your gender.')
+    return
+  }
+  if(query.length < 5){ showErr('Please describe your legal problem.'); return }
+
+  // Hide old results first
+  document.getElementById('answerBox').style.display  = 'none'
+  document.getElementById('helpCentersSection').style.display = 'none'
+  document.getElementById('guidanceSection').style.display = 'none'
+  
+  hideErr()
+
+  let btn = document.getElementById('submitBtn')
+  btn.disabled = true; btn.textContent = 'Processing...'
+
+  fetch('/submit_query', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({user_name:name, query:query, category:cat, gender:gender})
+  })
+  .then(r => {
+    if(!r.ok) throw new Error('HTTP '+r.status)
+    return r.json()
+  })
+  .then(data => {
+    document.getElementById('aiAnswer').innerText  = data.answer || 'Please visit the guidance page.'
+    document.getElementById('catBadge').innerText  = 'Category: ' + (data.category || 'General')
+    document.getElementById('answerBox').style.display = 'block'
+    showHelpCenters(data.category || 'General')
+    fetch('/guidance/' + encodeURIComponent(data.category || 'General'))
+    .then(r => r.json()).then(g => {
+      if(g.steps){
+        document.getElementById('guidanceSteps').innerText     = g.steps
+        document.getElementById('guidanceAuthority').innerText = g.authority || ''
+        document.getElementById('guidanceSection').style.display = 'block'
+      }
+    }).catch(()=>{})
+    document.getElementById('answerBox').scrollIntoView({behavior:'smooth'})
+    btn.disabled = false; btn.textContent = 'Submit Query'
+  })
+  .catch(err => {
+    console.error('Submit error:', err)
+    showErr('Could not connect to server. Make sure Flask is running on port 5000.')
+    btn.disabled = false; btn.textContent = 'Submit Query'
+  })
+}
+
+function showErr(m){
+  let e = document.getElementById('errMsg')
+  e.textContent = m
+  e.style.display = 'block'
+  e.scrollIntoView({behavior:'smooth', block:'center'})
+}
+function hideErr(){ document.getElementById('errMsg').style.display='none' }
+</script>
+
+<!-- HELP CENTERS JS -->
+<script>
+const HELP_CENTERS = {
+  'Cybercrime': [
+    { icon:'🖥️', name:'Cyber Crime Cell – Mira Road',         addr:'Mira Road Police Station, Beverly Park, Mira Road East 401107',         phone:'1930' },
+    { icon:'🖥️', name:'Cyber Crime Cell – Bhayandar',         addr:'Bhayandar Police Station, Station Road, Bhayandar West 401101',         phone:'1930' },
+    { icon:'🚔', name:'Kashimira Police Station',              addr:'MIDC Road, Kashimira, Mira Road East 401104',                           phone:'022-28145700' },
+    { icon:'🚔', name:'Navghar Police Station',                addr:'Navghar Road, Bhayandar East, Mira Bhayandar 401105',                   phone:'022-28196400' },
+    { icon:'🌐', name:'Online: cybercrime.gov.in',             addr:'National Cyber Crime Reporting Portal – File complaint 24x7',           phone:'1930' },
+  ],
+  'Domestic Violence': [
+    { icon:'👮‍♀️', name:'Mira Road Police Station – Mahila Cell',  addr:'Beverly Park, Mira Road East, Mira Bhayandar 401107',               phone:'022-28192250' },
+    { icon:'👮‍♀️', name:'Kashimira Police Station – Women Cell',   addr:'MIDC Road, Kashimira, Mira Road East 401104',                       phone:'022-28145700' },
+    { icon:'👮‍♀️', name:'Bhayandar Police Station – Mahila Cell',  addr:'Station Road, Bhayandar West, Mira Bhayandar 401101',               phone:'022-28199964' },
+    { icon:'👮‍♀️', name:'Navghar Police Station – Women Cell',     addr:'Navghar Road, Bhayandar East, Mira Bhayandar 401105',               phone:'022-28196400' },
+    { icon:'📞', name:'Women Helpline',                             addr:'24x7 National Women Helpline',                                      phone:'1091' },
+    { icon:'📞', name:'iCall – Psychosocial Helpline',              addr:'TISS Mumbai – Counselling & Legal Support',                         phone:'9152987821' },
+  ],
+  'Women Safety': [
+    { icon:'👮‍♀️', name:'Mira Road Police Station – Mahila Cell',  addr:'Beverly Park, Mira Road East, Mira Bhayandar 401107',               phone:'022-28192250' },
+    { icon:'👮‍♀️', name:'Bhayandar Police Station – Mahila Cell',  addr:'Station Road, Bhayandar West, Mira Bhayandar 401101',               phone:'022-28199964' },
+    { icon:'👮‍♀️', name:'Naya Nagar Police Station',               addr:'Puja Nagar Road, Naya Nagar, Mira Road East 401107',                phone:'022-28192300' },
+    { icon:'📞', name:'Police Emergency',                           addr:'24x7 Emergency – Any Police Station',                               phone:'112' },
+    { icon:'📞', name:'Women Helpline',                             addr:'24x7 National Helpline',                                            phone:'1091' },
+    { icon:'📞', name:'Nirbhaya – One Stop Crisis Centre',          addr:'Civil Hospital, Thane West 400601',                                 phone:'181' },
+  ],
+  'FIR': [
+    { icon:'🚔', name:'Mira Road Police Station',    addr:'Beverly Park, Mira Road East, Mira Bhayandar 401107',                             phone:'022-28192250' },
+    { icon:'🚔', name:'Kashimira Police Station',    addr:'MIDC Road, Kashimira, Mira Road East 401104',                                     phone:'022-28145700' },
+    { icon:'🚔', name:'Naya Nagar Police Station',   addr:'Puja Nagar Road, Naya Nagar, Mira Road East 401107',                              phone:'022-28192300' },
+    { icon:'🚔', name:'Bhayandar (West) Police Station', addr:'Station Road, Bhayandar West, Mira Bhayandar 401101',                         phone:'022-28199964' },
+    { icon:'🚔', name:'Navghar Police Station',      addr:'Navghar Road, Bhayandar East, Mira Bhayandar 401105',                             phone:'022-28196400' },
+    { icon:'🚔', name:'Uttan Police Station',        addr:'Uttan Village, Bhayandar West, Mira Bhayandar 401106',                            phone:'022-28452000' },
+  ],
+  'Consumer': [
+    { icon:'⚖️', name:'MBMC Consumer Helpdesk',           addr:'MBMC Main Building, M.G. Road, Bhayandar West, Mira Bhayandar 401101',      phone:'1800-233-4321' },
+    { icon:'🏛️', name:'MBMC Office – Mira Road',          addr:'Sector 5, Mira Road East, Mira Bhayandar 401107',                           phone:'022-28191000' },
+    { icon:'⚖️', name:'District Consumer Forum – Thane',  addr:'Collector Office Compound, Court Naka, Thane West 400601',                  phone:'022-25340045' },
+    { icon:'🌐', name:'Online: edaakhil.nic.in',           addr:'National Consumer Disputes Redressal Commission Portal',                    phone:'1800-11-4000' },
+  ],
+  'RTI': [
+    { icon:'🏛️', name:'MBMC RTI Office – Bhayandar',      addr:'MBMC Main Building, M.G. Road, Bhayandar West, Mira Bhayandar 401101',      phone:'022-28191000' },
+    { icon:'🏛️', name:'MBMC RTI Office – Mira Road',      addr:'Sector 5, Shanti Garden Road, Mira Road East 401107',                       phone:'022-28191000' },
+    { icon:'🏛️', name:'Sub-Divisional Office – Vasai',    addr:'Vasai Road, Palghar District 401202',                                       phone:'0250-2331010' },
+    { icon:'🏛️', name:'Collector Office – Thane',         addr:'Court Naka, Collector Office Compound, Thane West 400601',                  phone:'022-25344000' },
+    { icon:'🌐', name:'Online: rtionline.gov.in',          addr:'Central RTI Portal – Application fee Rs. 10 only',                          phone:'-' },
+  ],
+  'Property': [
+    { icon:'🏛️', name:'Mira Road Court Complex',          addr:'Sector 5, Shanti Garden Road, Mira Road East 401107',                       phone:'022-28191500' },
+    { icon:'🏛️', name:'MBMC Property Tax Office – Bhayandar', addr:'MBMC Main Building, M.G. Road, Bhayandar West 401101',                  phone:'022-28191000' },
+    { icon:'🏛️', name:'MBMC Property Tax Office – Mira Road', addr:'Sector 5, Mira Road East 401107',                                       phone:'022-28191001' },
+    { icon:'🏛️', name:'Thane District Court',             addr:'Court Naka, Thane West 400601',                                             phone:'022-25344000' },
+    { icon:'🌐', name:'RERA Maharashtra',                  addr:'Online: maharera.mahaonline.gov.in – Housing complaints',                   phone:'022-26590000' },
+  ],
+  'Legal Aid': [
+    { icon:'⚖️', name:'Mira Road Legal Aid Clinic',        addr:'Mira Road Court Complex, Sector 5, Mira Road East 401107',                  phone:'15100' },
+    { icon:'⚖️', name:'DLSA – Thane (District Legal Services)', addr:'District Court Complex, Court Naka, Thane West 400601',               phone:'022-25344001' },
+    { icon:'⚖️', name:'Taluka Legal Services Committee',   addr:'Vasai Court Complex, Vasai Road West, Palghar 401202',                      phone:'0250-2331500' },
+    { icon:'📞', name:'NALSA – National Legal Aid Helpline', addr:'Free legal aid for all citizens – Available in Hindi & Marathi',          phone:'15100' },
+  ],
+  'Child Safety': [
+    { icon:'👶', name:'Childline – 24x7 Helpline',          addr:'National Helpline for Children in Distress – Free & Confidential',         phone:'1098' },
+    { icon:'🏛️', name:'Child Welfare Committee – Mira Bhayandar', addr:'Near MBMC Office, Bhayandar West, Mira Bhayandar 401101',           phone:'022-28191000' },
+    { icon:'🏛️', name:'Child Welfare Committee – Thane',    addr:'Thane District Office, Thane West 400601',                                phone:'022-25344500' },
+    { icon:'🚔', name:'Mira Road Police Station',            addr:'Beverly Park, Mira Road East, Mira Bhayandar 401107',                     phone:'022-28192250' },
+    { icon:'🚔', name:'Bhayandar Police Station',            addr:'Station Road, Bhayandar West, Mira Bhayandar 401101',                     phone:'022-28199964' },
+  ],
+  'General': [
+    { icon:'🚔', name:'Mira Road Police Station',    addr:'Beverly Park, Mira Road East, Mira Bhayandar 401107',                             phone:'022-28192250' },
+    { icon:'🚔', name:'Kashimira Police Station',    addr:'MIDC Road, Kashimira, Mira Road East 401104',                                     phone:'022-28145700' },
+    { icon:'🚔', name:'Bhayandar Police Station',    addr:'Station Road, Bhayandar West, Mira Bhayandar 401101',                             phone:'022-28199964' },
+    { icon:'🚔', name:'Navghar Police Station',      addr:'Navghar Road, Bhayandar East, Mira Bhayandar 401105',                             phone:'022-28196400' },
+    { icon:'🏛️', name:'MBMC Office – Mira Road',    addr:'Sector 5, Shanti Garden Road, Mira Road East 401107',                             phone:'022-28191000' },
+    { icon:'📞', name:'NALSA Legal Aid Helpline',    addr:'Free legal aid – Hindi & Marathi available',                                      phone:'15100' },
+  ]
+}
+
+function showHelpCenters(category){
+  let centers = HELP_CENTERS[category] || HELP_CENTERS['General']
+  let html = ''
+  centers.forEach(c => {
+    html += '<div class="help-item">' +
+      '<div class="help-icon">' + c.icon + '</div>' +
+      '<div>' +
+        '<div class="help-name">' + c.name + '</div>' +
+        '<div class="help-addr">📍 ' + c.addr + '</div>' +
+        '<div class="help-phone">📞 ' + c.phone + '</div>' +
+      '</div></div>'
+  })
+  document.getElementById('helpCentersList').innerHTML = html
+  document.getElementById('helpCentersSection').style.display = 'block'
+  document.getElementById('helpCentersSection').scrollIntoView({behavior:'smooth', block:'nearest'})
+}
+</script>
+
+</body>
+</html>
